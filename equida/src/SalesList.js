@@ -16,10 +16,10 @@ const SalesList = () => {
       <ul>
         {ventes.map(vente => (
           <li key={vente.id}>
-            <p>Nom : {vente.datedebut}</p>
-            <p>Date Debut : {vente.amount}</p>
-            <p>Date Fin : {vente.customer}</p>
-            <p>Catégorie de vente : {vente.customer}</p>
+            <p>Nom : {vente.nom}</p>
+            <p>Date Debut : {vente.date_Debut}</p>
+            <p>Date Fin : {vente.date_fin}</p>
+            <p>Catégorie de vente : {vente.categorieDeVentes.libelle}</p>
           </li>
         ))}
       </ul>
