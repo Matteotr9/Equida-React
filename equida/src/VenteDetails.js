@@ -1,27 +1,27 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const VenteDetails = ({ venteId }) => {
-  const [vente, setVente] = useState(null);
+  const [venteDetails, setVenteDetails] = useState(null);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1/Equida-Spa2/public/api/vente/consulter/${venteId}`) // Mettez à jour l'URL en fonction de votre configuration
+    fetch(`http://127.0.0.1/Equida-Spa2/public/api/vente/consulter/${venteId}`)
       .then(response => response.json())
-      .then(data => setVente(data))
+      .then(data => setVenteDetails(data))
       .catch(error => console.log(error));
   }, [venteId]);
 
-  if (!vente) {
-    return <p>Chargement en cours...</p>;
+  if (!venteDetails) {
+    return <div>Loading...</div>;
   }
 
   return (
     <div>
       <h2>Détails de la vente</h2>
-      <p>Nom : {vente.nom}</p>
-      <p>Date début : {formatDate(vente.dateDebut)}</p>
-      <p>Date fin : {formatDate(vente.dateFin)}</p>
-      <p>Catégorie de Vente : {vente.categorieDeVentes}</p>
+      <p>Nom : {venteDetails.nom}</p>
+      <p>Date début : {formatDate(venteDetails.dateDebut)}</p>
+      <p>Date fin : {formatDate(venteDetails.dateFin)}</p>
+      <p>Catégorie de Vente : {venteDetails.categorieDeVentes}</p>
     </div>
   );
 };
@@ -33,3 +33,4 @@ const formatDate = date => {
 };
 
 export default VenteDetails;
+

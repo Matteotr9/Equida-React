@@ -16,12 +16,6 @@ const SalesList = () => {
     setSelectedVenteId(venteId);
   };
 
-  const formatDate = date => {
-    const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
-    const formattedDate = new Date(date).toLocaleDateString(undefined, options);
-    return formattedDate;
-  };
-
   return (
     <div>
       <h1>Liste des ventes</h1>
@@ -38,9 +32,7 @@ const SalesList = () => {
         <tbody>
           {sales.map(vente => (
             <tr key={vente.id} onClick={() => handleVenteClick(vente.id)}>
-              <td>
-                <a href={`http://127.0.0.1/Equida-Spa2/public/api/vente/consulter/${vente.id}`}>{vente.nom}</a>
-              </td>
+              <td>{vente.nom}</td>
               <td>{formatDate(vente.dateDebut)}</td>
               <td>{formatDate(vente.dateFin)}</td>
               <td>{vente.categorieDeVentes}</td>
@@ -52,6 +44,12 @@ const SalesList = () => {
       {selectedVenteId && <VenteDetails venteId={selectedVenteId} />}
     </div>
   );
+};
+
+const formatDate = date => {
+  const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
+  const formattedDate = new Date(date).toLocaleDateString(undefined, options);
+  return formattedDate;
 };
 
 export default SalesList;
