@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import VenteDetails from './VenteDetails';
 
 const SalesList = () => {
-  const [ventes, setSales] = useState([]);
+  const [sales, setSales] = useState([]);
+  const [selectedVenteId, setSelectedVenteId] = useState(null);
 
   useEffect(() => {
     fetch('http://127.0.0.1/Equida-Spa2/public/api/vente/lister')
@@ -10,19 +12,44 @@ const SalesList = () => {
       .catch(error => console.log(error));
   }, []);
 
+  const handleVenteClick = venteId => {
+    setSelectedVenteId(venteId);
+  };
+
+  const formatDate = date => {
+    const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
+    const formattedDate = new Date(date).toLocaleDateString(undefined, options);
+    return formattedDate;
+  };
+
   return (
     <div>
       <h1>Liste des ventes</h1>
-      <ul>
-        {ventes.map(vente => (
-          <li key={vente.id}>
-            <p>Nom : {vente.nom}</p>
-            <p>Date Debut : {vente.date_Debut}</p>
-            <p>Date Fin : {vente.date_fin}</p>
-            <p>Catégorie de vente : {vente.categorieDeVentes.libelle}</p>
-          </li>
-        ))}
-      </ul>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Date début</th>
+            <th>Date fin</th>
+            <th>Catégorie de Vente</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sales.map(vente => (
+            <tr key={vente.id} onClick={() => handleVenteClick(vente.id)}>
+              <td>
+                <a href={`http://127.0.0.1/Equida-Spa2/public/api/vente/consulter/${vente.id}`}>{vente.nom}</a>
+              </td>
+              <td>{formatDate(vente.dateDebut)}</td>
+              <td>{formatDate(vente.dateFin)}</td>
+              <td>{vente.categorieDeVentes}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {selectedVenteId && <VenteDetails venteId={selectedVenteId} />}
     </div>
   );
 };
