@@ -28,7 +28,7 @@ const VenteDetails = ({ vente }) => {
           {chevaux.map(lot => (
             <tr key={lot.id}>
               <td>{lot.cheval.nom}</td>
-              <td>{lot.cheval.race.libelle}</td>
+              <td>{lot.cheval.race.libellle}</td>
               <td>{lot.miseAPrix}</td>
             </tr>
           ))}
