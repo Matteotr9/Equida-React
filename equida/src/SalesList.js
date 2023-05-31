@@ -1,19 +1,23 @@
+
+
+
 import React, { useState, useEffect } from 'react';
 import VenteDetails from './VenteDetails';
 
 const SalesList = () => {
   const [sales, setSales] = useState([]);
-  const [selectedVenteId, setSelectedVenteId] = useState(null);
+  const [selectedVente, setSelectedVente] = useState(null);
 
   useEffect(() => {
-    fetch('http://127.0.0.1/Equida-Spa2/public/api/vente/lister')
+    fetch('http://127.0.0.1/Equida-Spa2/public/api/vente/lister') // Remplacez l'URL par l'URL de votre API
       .then(response => response.json())
       .then(data => setSales(data))
       .catch(error => console.log(error));
   }, []);
 
   const handleVenteClick = venteId => {
-    setSelectedVenteId(venteId);
+    const selectedVente = sales.find(vente => vente.id === venteId);
+    setSelectedVente(selectedVente);
   };
 
   return (
@@ -41,7 +45,7 @@ const SalesList = () => {
         </tbody>
       </table>
 
-      {selectedVenteId && <VenteDetails venteId={selectedVenteId} />}
+      {selectedVente && <VenteDetails vente={selectedVente} />}
     </div>
   );
 };

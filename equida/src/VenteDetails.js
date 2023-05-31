@@ -1,27 +1,39 @@
-
 import React, { useState, useEffect } from 'react';
 
-const VenteDetails = ({ venteId }) => {
-  const [venteDetails, setVenteDetails] = useState(null);
+const VenteDetails = ({ vente }) => {
+  const [chevaux, setChevaux] = useState([]);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1/Equida-Spa2/public/api/vente/consulter/${venteId}`)
+    fetch(`http://127.0.0.1/Equida-Spa2/public/api/cheval/consulter/${vente.id}`)
       .then(response => response.json())
-      .then(data => setVenteDetails(data))
+      .then(data => setChevaux(data.lots))
       .catch(error => console.log(error));
-  }, [venteId]);
-
-  if (!venteDetails) {
-    return <div>Loading...</div>;
-  }
+  }, [vente.id]);
 
   return (
     <div>
-      <h2>Détails de la vente</h2>
-      <p>Nom : {venteDetails.nom}</p>
-      <p>Date début : {formatDate(venteDetails.dateDebut)}</p>
-      <p>Date fin : {formatDate(venteDetails.dateFin)}</p>
-      <p>Catégorie de Vente : {venteDetails.categorieDeVentes}</p>
+      <h1>
+        Vente : {vente.nom} du {formatDate(vente.dateDebut)} au {formatDate(vente.dateFin)}
+      </h1>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Nom du Cheval</th>
+            <th>Race</th>
+            <th>Mise A prix</th>
+          </tr>
+        </thead>
+        <tbody>
+          {chevaux.map(lot => (
+            <tr key={lot.id}>
+              <td>{lot.cheval.nom}</td>
+              <td>{lot.cheval.race.libelle}</td>
+              <td>{lot.miseAPrix}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
@@ -33,4 +45,3 @@ const formatDate = date => {
 };
 
 export default VenteDetails;
-
