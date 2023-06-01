@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import ChevauxDetails from './ChevauxDetails';
 
-const ChevauxList = () => {
+const ChevalList = () => {
   const [chevaux, setChevaux] = useState([]);
-  const [selectedCheval, setSelectedCheval] = useState(null);
 
   useEffect(() => {
-    fetch('http://127.0.0.1/Equida-Spa2/public/api/cheval/lister')
+    fetch('http://127.0.0.1/Equida-Spa2/public/api/cheval/lister') // Remplacez l'URL par l'URL de votre API
       .then(response => response.json())
       .then(data => setChevaux(data))
       .catch(error => console.log(error));
   }, []);
-
-  const handleChevalClick = chevalId => {
-    const selectedCheval = chevaux.find(cheval => cheval.id === chevalId);
-    setSelectedCheval(selectedCheval);
-  };
 
   return (
     <div>
@@ -26,23 +19,21 @@ const ChevauxList = () => {
           <tr>
             <th>Nom</th>
             <th>Race</th>
-            <th>Prix de Vente</th>
+            <th>Prix de vente</th>
           </tr>
         </thead>
         <tbody>
           {chevaux.map(cheval => (
-            <tr key={cheval.id} onClick={() => handleChevalClick(cheval.id)}>
-              <td>{cheval.nom}</td>
-              <td>{cheval.race.libellle}</td>
-              <td>{cheval.prixDeVente}</td>
+            <tr key={cheval.id}>
+              <td>{cheval.nomCheval}</td>
+              <td>{cheval.raceDuCheval}</td>
+              <td>{cheval.prixDeVenteCheval}</td>
             </tr>
           ))}
         </tbody>
       </table>
-
-      {selectedCheval && <ChevauxDetails cheval={selectedCheval} />}
     </div>
   );
 };
 
-export default ChevauxList;
+export default ChevalList;
