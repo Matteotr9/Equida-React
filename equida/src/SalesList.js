@@ -1,23 +1,26 @@
-
-
-
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import VenteDetails from './VenteDetails';
 
 const SalesList = () => {
-  const [sales, setSales] = useState([]);
+  const [ventes, setVentes] = useState([]);
   const [selectedVente, setSelectedVente] = useState(null);
 
   useEffect(() => {
-    fetch('http://127.0.0.1/Equida-Spa2/public/api/vente/lister') // Remplacez l'URL par l'URL de votre API
+    fetch('http://127.0.0.1/Equida-Spa2/public/api/vente/lister')
       .then(response => response.json())
-      .then(data => setSales(data))
+      .then(data => setVentes(data))
       .catch(error => console.log(error));
   }, []);
 
   const handleVenteClick = venteId => {
-    const selectedVente = sales.find(vente => vente.id === venteId);
+    const selectedVente = ventes.find(vente => vente.id === venteId);
     setSelectedVente(selectedVente);
+  };
+
+  const formatDate = date => {
+    const formattedDate = moment(date, 'YYYY-MM-DD').format('DD/MM/YYYY');
+    return formattedDate;
   };
 
   return (
@@ -34,12 +37,12 @@ const SalesList = () => {
           </tr>
         </thead>
         <tbody>
-          {sales.map(vente => (
+          {ventes.map(vente => (
             <tr key={vente.id} onClick={() => handleVenteClick(vente.id)}>
-              <td>{vente.nom}</td>
-              <td>{formatDate(vente.dateDebut)}</td>
-              <td>{formatDate(vente.dateFin)}</td>
-              <td>{vente.categorieDeVentes}</td>
+              <td>{vente.nomVente}</td>
+              <td>{formatDate(vente.dateDebutVente)}</td>
+              <td>{formatDate(vente.dateFinVente)}</td>
+              <td>{vente.libelleCategorieDeVente}</td>
             </tr>
           ))}
         </tbody>
@@ -48,12 +51,6 @@ const SalesList = () => {
       {selectedVente && <VenteDetails vente={selectedVente} />}
     </div>
   );
-};
-
-const formatDate = date => {
-  const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
-  const formattedDate = new Date(date).toLocaleDateString(undefined, options);
-  return formattedDate;
 };
 
 export default SalesList;
