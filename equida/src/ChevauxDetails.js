@@ -26,7 +26,7 @@ const ChevalList = () => {
           {chevaux.map(cheval => (
             <tr key={cheval.id}>
               <td>{cheval.nomCheval}</td>
-              <td>{cheval.raceDuCheval}</td>
+              <td>{cheval.libelleraceDuCheval}</td>
               <td>{cheval.prixDeVenteCheval}</td>
             </tr>
           ))}
