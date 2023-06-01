@@ -19,7 +19,8 @@ const SalesList = () => {
   };
 
   const formatDate = date => {
-    const formattedDate = moment(date, 'YYYY-MM-DD').format('DD/MM/YYYY');
+    console.log(date);
+    const formattedDate = moment(date.date, 'YYYY-MM-DD').format('DD/MM/YYYY');
     return formattedDate;
   };
 
