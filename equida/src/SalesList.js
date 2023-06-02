@@ -49,7 +49,12 @@ const SalesList = () => {
         </tbody>
       </table>
 
-      {selectedVente && <VenteDetails vente={selectedVente} />}
+      {selectedVente && <VenteDetails vente={selectedVente}
+      nom={selectedVente.nomVente}
+      dateDebut={selectedVente.dateDebutVente}
+      dateFin={selectedVente.dateFinVente}
+
+      />}
     </div>
   );
 };

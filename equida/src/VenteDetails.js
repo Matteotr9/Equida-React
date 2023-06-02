@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 
-const VenteDetails = ({ vente }) => {
+const VenteDetails = ({ vente,nom,dateDebut,dateFin }) => {
   const [lots, setLots] = useState([]);
 
   useEffect(() => {
@@ -14,13 +14,13 @@ const VenteDetails = ({ vente }) => {
 
   const formatDate = date => {
     console.log(date);
-    const formattedDate = moment(date, 'DD/MM/YYYY').format('DD/MM/YYYY');
+    const formattedDate = moment(date.date, 'YYYY-MM-DD').format('DD/MM/YYYY');
     return formattedDate;
   };
   return (
     <div>
       <h1>
-        Vente : {vente.nom} du {vente.dateDebut} au {formatDate(vente.dateFin)}
+        Vente : {nom} du {formatDate(dateDebut)} au {formatDate(dateFin)}
       </h1>
 
       <table>
