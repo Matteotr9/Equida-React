@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import moment from 'moment';
+
 const VenteDetails = ({ vente }) => {
   const [chevaux, setChevaux] = useState([]);
 
@@ -9,10 +9,7 @@ const VenteDetails = ({ vente }) => {
       .then(data => setChevaux(data.lots))
       .catch(error => console.log(error));
   }, [vente.id]);
-  const formatDate = date => {
-    console.log(date);
-    const formattedDate = moment(date.date, 'YYYY-MM-DD').format('DD/MM/YYYY');
-    return formattedDate;}
+  
 
   return (
     <div>
@@ -42,6 +39,10 @@ const VenteDetails = ({ vente }) => {
   );
 };
 
-
+const formatDate = date => {
+  const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
+  const formattedDate = new Date(date).toLocaleDateString(undefined, options);
+  return formattedDate;
+};
 
 export default VenteDetails;
