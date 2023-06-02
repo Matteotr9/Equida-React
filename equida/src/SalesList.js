@@ -14,7 +14,7 @@ const SalesList = () => {
   }, []);
 
   const handleVenteClick = venteId => {
-    const selectedVente = ventes.find(vente => vente.id === venteId);
+    const selectedVente = ventes.find(vente => vente.idVente === venteId);
     setSelectedVente(selectedVente);
   };
 
@@ -39,7 +39,7 @@ const SalesList = () => {
         </thead>
         <tbody>
           {ventes.map(vente => (
-            <tr key={vente.id} onClick={() => handleVenteClick(vente.id)}>
+            <tr key={vente.idVente} onClick={() => handleVenteClick(vente.idVente)}>
               <td>{vente.nomVente}</td>
               <td>{formatDate(vente.dateDebutVente)}</td>
               <td>{formatDate(vente.dateFinVente)}</td>
