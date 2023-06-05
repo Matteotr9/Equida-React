@@ -17,6 +17,7 @@ const VenteDetails = ({ vente,nom,dateDebut,dateFin }) => {
     const formattedDate = moment(date.date, 'YYYY-MM-DD').format('DD/MM/YYYY');
     return formattedDate;
   };
+  
   return (
     <div>
       <h1>
