@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
+import ChevalDetails from './ChevalDetails';
 
 const VenteDetails = ({ vente,nom,dateDebut,dateFin }) => {
   const [lots, setLots] = useState([]);
+  const [selectedChevalId, setSelectedChevalId] = useState(null);
 
   useEffect(() => {
     console.log(vente);
@@ -34,7 +36,7 @@ const VenteDetails = ({ vente,nom,dateDebut,dateFin }) => {
         </thead>
         <tbody>
           {lots.map(lot => (
-            <tr key={lot.lotChevalNom}>
+             <tr key={lot.lotChevalId} onClick={() => setSelectedChevalId(lot.lotChevalId)}>
               <td>{lot.lotChevalNom}</td>
               <td>{lot.lotChevalRaceLibelle}</td>
               <td>{lot.lotMiseAPrix}</td>
@@ -42,6 +44,7 @@ const VenteDetails = ({ vente,nom,dateDebut,dateFin }) => {
           ))}
         </tbody>
       </table>
+      {selectedChevalId && <ChevalDetails chevalId={selectedChevalId} />}
     </div>
   );
 };

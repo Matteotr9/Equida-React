@@ -18,8 +18,9 @@ const App = () => {
   };
 
   return (
+    
     <div>
-      <h1>Mon application de ventes</h1>
+      <h1>Equida</h1>
       {!showSalesList && <p onClick={handleSalesListClick}>Liste des Ventes</p>}
       {showSalesList && <SalesList />}
       {!showChevauxList && <p onClick={handleChevauxListClick}>Liste des Chevaux</p>}

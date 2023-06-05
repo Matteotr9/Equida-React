@@ -35,4 +35,30 @@
   to {
     transform: rotate(360deg);
   }
+
+
+  
 }
+
+.container {
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 18px;
+  color: #666;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+p:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
