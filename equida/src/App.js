@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SalesList from './SalesList';
-import ChevauxList from './ChevauxDetails';
+import ChevauxList from './ChevalList';
+import ChevalList from './ChevalList';
 
 const App = () => {
   const [showSalesList, setShowSalesList] = useState(false);
@@ -22,7 +23,7 @@ const App = () => {
       {!showSalesList && <p onClick={handleSalesListClick}>Liste des Ventes</p>}
       {showSalesList && <SalesList />}
       {!showChevauxList && <p onClick={handleChevauxListClick}>Liste des Chevaux</p>}
-      {showChevauxList && <ChevauxList />}
+      {showChevauxList && <ChevalList />}
     </div>
   );
 };
